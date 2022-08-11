@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const uriPosts = {
+  posts: process.env.REACT_APP_POSTS
+}
+
 // initialState
 const initialState = {
   posts: [],
@@ -15,7 +19,7 @@ export const __getPosts = createAsyncThunk(
   "posts/__getPosts",
   async (args, thunkAPI) => {
     try {
-      const response = await axios.get("http://localhost:3001/posts");
+      const response = await axios.get(uriPosts.posts);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -29,7 +33,7 @@ export const __getPost = createAsyncThunk(
   async (post_id, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/posts/${post_id}`
+        `${uriPosts.posts}/${post_id}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -44,7 +48,7 @@ export const __createPost = createAsyncThunk(
     try {
       console.log(new_post);
       const response = await axios.post(
-        "http://localhost:3001/posts",
+        uriPosts.posts,
         new_post
       );
       const new_post_id = response.data.id;
@@ -63,7 +67,7 @@ export const __editPost = createAsyncThunk(
       const { post_id, edit_post } = edit_info;
       console.log(post_id)
       const response = await axios.patch(
-        `http://localhost:3001/posts/${post_id}`,
+        `${uriPosts.posts}/${post_id}`,
         edit_post
       );
       const edit_id = response.data.id;
@@ -78,7 +82,7 @@ export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (post_id, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/posts/${post_id}`);
+      await axios.delete(`${uriPosts.posts}/${post_id}`);
       return thunkAPI.fulfillWithValue({ post_id });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
