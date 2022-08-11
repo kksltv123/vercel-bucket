@@ -96,17 +96,23 @@ const CommentListDiv = styled.div `
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin: 10px 0;
-
+padding: 20px 0;
+border-bottom: 1px solid #8181811d;
 >div:last-of-type{
-  width: 409px;
+  width: 400px;
   justify-content: flex-end;
+}
+>div:first-of-type{
+  width: 100%;
+  align-items: flex-start;
+  div:last-of-type{
+    width: 80%;
+  }
 }
 div{
   display: flex;
   align-items: center;
 }
-
 @media screen and (max-width: 1250px) {
         flex-direction: column;
         align-items: flex-end;
@@ -121,11 +127,9 @@ div{
 `
 const Username = styled.div`
   font-size: 0.7rem;
-  width: 140px;
+  width: 100px;
   margin-right: 10px;
-  
 `
-
 const FormComment =  styled.input`
     width: 550px;
     padding: 10px 30px;
