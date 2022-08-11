@@ -50,6 +50,7 @@ const Comment = ({comment}) => {
       setCommentNum();
       setContents("");
     }  
+    // 업데이트
     return (
         <>
             {commentNum === comment.id ? (
